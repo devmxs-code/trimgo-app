@@ -534,45 +534,45 @@ Agradecemos sua preferência!`;
       </div>
       
       {/* Services List */}
-      <div className="grid gap-4">
+      <div className="grid gap-5">
         {filteredServices.length > 0 ? (
           filteredServices.map((service) => (
-            <div
-              key={service.id}
-              onClick={() => handleServiceSelect(service)}
-              className="bg-white rounded-xl shadow-sm p-5 cursor-pointer hover:shadow-md transition-all duration-200 border border-gray-100 hover:border-blue-300 group"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-3 rounded-lg">
-                    <Scissors className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-800 group-hover:text-blue-600">{service.name}</h3>
-                    <p className="text-gray-600 text-sm">{service.duration} min • R$ {service.price}</p>
-                    <div className="flex items-center mt-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs text-gray-500 ml-1">{service.popularity.toFixed(1)}</span>
-                    </div>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 mt-2" />
-              </div>
-              <p className="text-gray-500 text-sm mt-3">{service.description}</p>
+        <div
+          key={service.id}
+          onClick={() => handleServiceSelect(service)}
+          className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-2xl shadow-md p-6 cursor-pointer hover:shadow-lg transition-all duration-200 border-2 border-transparent hover:border-blue-400 group"
+        >
+          <div className="flex items-start justify-between">
+            <div className="flex items-start space-x-4">
+          <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-indigo-100 p-3 rounded-xl shadow group-hover:from-blue-300 group-hover:to-indigo-200 transition-all">
+            <Scissors className="w-7 h-7 text-blue-700 group-hover:text-indigo-700" />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg text-blue-900 group-hover:text-blue-700">{service.name}</h3>
+            <p className="text-blue-700 text-sm font-medium">{service.duration} min • <span className="text-indigo-700 font-bold">R$ {service.price}</span></p>
+            <div className="flex items-center mt-1">
+              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              <span className="text-xs text-blue-600 ml-1 font-semibold">{service.popularity.toFixed(1)}</span>
             </div>
+          </div>
+            </div>
+            <ChevronRight className="w-6 h-6 text-indigo-300 group-hover:text-blue-600 mt-2" />
+          </div>
+          <p className="text-gray-600 text-sm mt-3">{service.description}</p>
+        </div>
           ))
         ) : (
-          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-center">
-            <p className="text-yellow-800">Nenhum serviço encontrado com esses critérios</p>
-            <button 
-              onClick={() => {
-                setSelectedCategory('Todos');
-                setSearchQuery('');
-              }}
-              className="text-blue-600 text-sm font-medium mt-2"
-            >
-              Limpar filtros
-            </button>
+          <div className="bg-gradient-to-r from-yellow-100 via-yellow-50 to-white border-2 border-yellow-200 p-6 rounded-2xl text-center shadow">
+        <p className="text-yellow-900 font-semibold">Nenhum serviço encontrado com esses critérios</p>
+        <button 
+          onClick={() => {
+            setSelectedCategory('Todos');
+            setSearchQuery('');
+          }}
+          className="text-blue-700 text-sm font-bold mt-3 underline hover:text-indigo-700 transition"
+        >
+          Limpar filtros
+        </button>
           </div>
         )}
       </div>

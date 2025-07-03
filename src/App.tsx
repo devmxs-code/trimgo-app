@@ -367,36 +367,37 @@ Agradecemos sua preferência!`;
       </div>
   
       {/* Features Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-          <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Calendar className="w-6 h-6 text-blue-600" />
+      <div className="grid grid-cols-2 gap-5 mt-2">
+        <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 p-5 rounded-2xl shadow-md border border-blue-50 hover:shadow-lg transition-all group">
+          <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-50 transition-all">
+            <Calendar className="w-7 h-7 text-blue-500 group-hover:text-blue-700" />
           </div>
-          <h3 className="font-semibold text-gray-800">Agendamento 24h</h3>
-          <p className="text-xs text-gray-500">Reserve a qualquer momento</p>
+          <h3 className="font-semibold text-blue-800 text-center text-base">Agendamento 24h</h3>
+          <p className="text-xs text-blue-600 text-center mt-1">Reserve a qualquer momento</p>
         </div>
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-          <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Users className="w-6 h-6 text-purple-600" />
+        <div className="bg-gradient-to-br from-purple-50 via-violet-100 to-fuchsia-100 p-5 rounded-2xl shadow-md border border-purple-50 hover:shadow-lg transition-all group">
+          <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-50 transition-all">
+            <Users className="w-7 h-7 text-purple-500 group-hover:text-fuchsia-700" />
           </div>
-          <h3 className="font-semibold text-gray-800">Profissionais</h3>
-          <p className="text-xs text-gray-500">Especialistas certificados</p>
+          <h3 className="font-semibold text-purple-800 text-center text-base">Profissionais</h3>
+          <p className="text-xs text-purple-600 text-center mt-1">Especialistas certificados</p>
         </div>
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-          <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Shield className="w-6 h-6 text-green-600" />
+        <div className="bg-gradient-to-br from-green-50 via-emerald-100 to-teal-100 p-5 rounded-2xl shadow-md border border-green-50 hover:shadow-lg transition-all group">
+          <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-green-50 transition-all">
+            <Shield className="w-7 h-7 text-green-500 group-hover:text-teal-700" />
           </div>
-          <h3 className="font-semibold text-gray-800">Segurança</h3>
-          <p className="text-xs text-gray-500">Protocolos rigorosos</p>
+          <h3 className="font-semibold text-green-800 text-center text-base">Segurança</h3>
+          <p className="text-xs text-green-600 text-center mt-1">Protocolos rigorosos</p>
         </div>
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-          <div className="bg-amber-100 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <Gift className="w-6 h-6 text-amber-600" />
+        <div className="bg-gradient-to-br from-yellow-50 via-amber-100 to-orange-100 p-5 rounded-2xl shadow-md border border-yellow-50 hover:shadow-lg transition-all group">
+          <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-yellow-50 transition-all">
+            <Gift className="w-7 h-7 text-amber-500 group-hover:text-orange-700" />
           </div>
-          <h3 className="font-semibold text-gray-800">Fidelidade</h3>
-          <p className="text-xs text-gray-500">Programa de benefícios</p>
+          <h3 className="font-semibold text-amber-800 text-center text-base">Fidelidade</h3>
+          <p className="text-xs text-amber-600 text-center mt-1">Programa de benefícios</p>
         </div>
-      </div>
+        </div>
+    
   
       {/* CTA Buttons */}
       <div className="space-y-4">
@@ -1225,7 +1226,7 @@ Agradecemos sua preferência!`;
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   );
 
   return (

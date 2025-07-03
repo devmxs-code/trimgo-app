@@ -447,13 +447,16 @@ Agradecemos sua preferência!`;
                 <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
               </div>
             </div>
-            <button 
-              className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm"
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Rua+das+Barbearias,+123+-+Centro,+Caraguatatuba+-+SP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm flex items-center justify-center hover:bg-blue-100 transition-colors"
               aria-label="Ver rotas no mapa"
               title="Ver rotas no mapa"
             >
               Ver rotas no mapa
-            </button>
+            </a>
           </div>
         </div>
       )}

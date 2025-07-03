@@ -428,44 +428,53 @@ Agradecemos sua preferência!`;
   
       {/* Map Section - Movido para o final */}
     {showMap && (
-      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-        <div className="h-64 relative">
+      <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-2xl shadow-xl overflow-hidden border border-blue-100">
+        <div className="relative h-64">
+          {/* Google Maps com marcador */}
           <iframe
-            className="trimgo-map-iframe"
-            width="100%"
-            height="100%"
-            src="https://maps.google.com/maps?q=Rua%20das%20Barbearias%2C%20123%20-%20Centro%2C%20Caraguatatuba%20-%20SP&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            frameBorder="0"
-            allowFullScreen
-            aria-hidden="false"
-            tabIndex={0}
-            title="Localização da Barbearia TrimGo no Google Maps"
+        className="trimgo-map-iframe"
+        width="100%"
+        height="100%"
+        src="https://www.google.com/maps?q=Rua%20das%20Barbearias%2C%20123%20-%20Centro%2C%20Caraguatatuba%20-%20SP&z=15&output=embed&iwloc=near"
+        frameBorder="0"
+        allowFullScreen
+        aria-hidden="false"
+        tabIndex={0}
+        title="Localização da Barbearia TrimGo no Google Maps"
+        style={{ borderRadius: '0 0 1.5rem 1.5rem', filter: 'saturate(1.2) contrast(1.05)' }}
           ></iframe>
           <button 
-            onClick={() => setShowMap(false)}
-            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md z-10"
-            aria-label="Fechar mapa"
+        onClick={() => setShowMap(false)}
+        className="absolute top-3 right-3 bg-white/90 hover:bg-blue-100 p-2 rounded-full shadow-lg z-10 transition-all"
+        aria-label="Fechar mapa"
           >
-            <X className="w-4 h-4 text-gray-600" />
+        <X className="w-5 h-5 text-blue-600" />
           </button>
+          {/* Marcador visual sobreposto */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-2/3 z-10 pointer-events-none">
+        <MapPin className="w-10 h-10 text-green-600 drop-shadow-lg animate-bounce" />
+          </div>
         </div>
-        <div className="p-4">
-          <div className="flex items-center space-x-2">
-            <MapPin className="w-5 h-5 text-red-500" />
-            <div>
-              <h3 className="font-semibold text-gray-800">Barbearia TrimGo</h3>
-              <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
-            </div>
+        <div className="p-5">
+          <div className="flex items-center space-x-3 mb-2">
+        <div className="bg-green-100 p-2 rounded-full">
+          <MapPin className="w-6 h-6 text-green-500" />
+        </div>
+        <div>
+          <h3 className="font-bold text-gray-800 text-lg">Barbearia TrimGo</h3>
+          <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
+        </div>
           </div>
           <a
-            href="https://www.google.com/maps/dir/?api=1&destination=Rua+das+Barbearias,+123+-+Centro,+Caraguatatuba+-+SP"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm flex items-center justify-center hover:bg-blue-100 transition-colors"
-            aria-label="Ver rotas no mapa"
-            title="Ver rotas no mapa"
+        href="https://www.google.com/maps/dir/?api=1&destination=Rua+das+Barbearias,+123+-+Centro,+Caraguatatuba+-+SP"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow hover:from-blue-700 hover:to-indigo-700 transition-all"
+        aria-label="Ver rotas no mapa"
+        title="Ver rotas no mapa"
           >
-            Ver rotas no mapa
+        <MapPin className="w-5 h-5" />
+        Ver rotas no mapa
           </a>
         </div>
       </div>

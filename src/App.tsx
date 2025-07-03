@@ -3,7 +3,7 @@ import {
   Calendar, Clock, User, Phone, Scissors, CheckCircle, ArrowLeft, 
   MapPin, Star, Users, ChevronRight, Info, Shield, CreditCard, 
   Smile, Frown, Bookmark, Settings, LogOut, BarChart2, Gift,
-  X, Map, Search
+  X, Search
 } from 'lucide-react';
 
 interface Service {
@@ -426,40 +426,49 @@ Agradecemos sua preferência!`;
       </div>
   
       {/* Map Section - Movido para o final */}
-      {showMap && (
-        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-          <div className="h-48 bg-gray-200 relative flex items-center justify-center">
-            <Map className="w-12 h-12 text-gray-400" />
-            <button 
-              onClick={() => setShowMap(false)}
-              className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md"
-              aria-label="Fechar mapa"
-              title="Fechar mapa"
-            >
-              <X className="w-4 h-4 text-gray-600" />
-            </button>
-          </div>
-          <div className="p-4">
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-5 h-5 text-red-500" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Barbearia TrimGo</h3>
-                <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
-              </div>
-            </div>
-            <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Rua+das+Barbearias,+123+-+Centro,+Caraguatatuba+-+SP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm flex items-center justify-center hover:bg-blue-100 transition-colors"
-              aria-label="Ver rotas no mapa"
-              title="Ver rotas no mapa"
-            >
-              Ver rotas no mapa
-            </a>
-          </div>
+    {showMap && (
+      <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+        <div className="h-64 relative">
+          <iframe
+            className="trimgo-map-iframe"
+            width="100%"
+            height="100%"
+            src="https://maps.google.com/maps?q=Rua%20das%20Barbearias%2C%20123%20-%20Centro%2C%20Caraguatatuba%20-%20SP&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            frameBorder="0"
+            allowFullScreen
+            aria-hidden="false"
+            tabIndex={0}
+            title="Localização da Barbearia TrimGo no Google Maps"
+          ></iframe>
+          <button 
+            onClick={() => setShowMap(false)}
+            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md z-10"
+            aria-label="Fechar mapa"
+          >
+            <X className="w-4 h-4 text-gray-600" />
+          </button>
         </div>
-      )}
+        <div className="p-4">
+          <div className="flex items-center space-x-2">
+            <MapPin className="w-5 h-5 text-red-500" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Barbearia TrimGo</h3>
+              <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
+            </div>
+          </div>
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=Rua+das+Barbearias,+123+-+Centro,+Caraguatatuba+-+SP"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm flex items-center justify-center hover:bg-blue-100 transition-colors"
+            aria-label="Ver rotas no mapa"
+            title="Ver rotas no mapa"
+          >
+            Ver rotas no mapa
+          </a>
+        </div>
+      </div>
+    )}
     </div>
   );
 

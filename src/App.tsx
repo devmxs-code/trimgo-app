@@ -344,7 +344,7 @@ Agradecemos sua preferência!`;
           </div>
         </div>
       </div>
-
+  
       {/* Status Card */}
       <div className={`p-5 rounded-xl shadow-md ${currentStatus.isOpen ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200' : 'bg-gradient-to-r from-red-50 to-rose-50 border border-red-200'}`}>
         <div className="flex items-center justify-between">
@@ -365,40 +365,7 @@ Agradecemos sua preferência!`;
           <p className="text-sm mt-2 text-gray-600">Abre às {currentStatus.nextOpening}</p>
         )}
       </div>
-
-        {/* Map Section */}
-        {showMap && (
-              <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                <div className="h-48 bg-gray-200 relative flex items-center justify-center">
-                  <Map className="w-12 h-12 text-gray-400" />
-                  <button 
-                    onClick={() => setShowMap(false)}
-                    className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md"
-                    aria-label="Fechar mapa"
-                    title="Fechar mapa"
-                  >
-                    <X className="w-4 h-4 text-gray-600" />
-                  </button>
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="w-5 h-5 text-red-500" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800">Barbearia TrimGo</h3>
-                      <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
-                    </div>
-                  </div>
-                  <button 
-                    className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm"
-                    aria-label="Ver rotas no mapa"
-                    title="Ver rotas no mapa"
-                  >
-                    Ver rotas no mapa
-                  </button>
-                </div>
-              </div>
-            )}
-
+  
       {/* Features Grid */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
@@ -430,7 +397,7 @@ Agradecemos sua preferência!`;
           <p className="text-xs text-gray-500">Programa de benefícios</p>
         </div>
       </div>
-
+  
       {/* CTA Buttons */}
       <div className="space-y-4">
         <button
@@ -457,6 +424,39 @@ Agradecemos sua preferência!`;
           </button>
         )}
       </div>
+  
+      {/* Map Section - Movido para o final */}
+      {showMap && (
+        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <div className="h-48 bg-gray-200 relative flex items-center justify-center">
+            <Map className="w-12 h-12 text-gray-400" />
+            <button 
+              onClick={() => setShowMap(false)}
+              className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md"
+              aria-label="Fechar mapa"
+              title="Fechar mapa"
+            >
+              <X className="w-4 h-4 text-gray-600" />
+            </button>
+          </div>
+          <div className="p-4">
+            <div className="flex items-center space-x-2">
+              <MapPin className="w-5 h-5 text-red-500" />
+              <div>
+                <h3 className="font-semibold text-gray-800">Barbearia TrimGo</h3>
+                <p className="text-sm text-gray-600">Rua das Barbearias, 123 - Centro, Caraguatatuba - SP</p>
+              </div>
+            </div>
+            <button 
+              className="w-full mt-3 bg-blue-50 text-blue-600 py-2 rounded-lg font-medium text-sm"
+              aria-label="Ver rotas no mapa"
+              title="Ver rotas no mapa"
+            >
+              Ver rotas no mapa
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 

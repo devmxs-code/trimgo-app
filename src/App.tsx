@@ -135,7 +135,7 @@ const TrimGo: React.FC = () => {
       specialty: 'Cortes Clássicos',
       rating: 4.9,
       photo: 'https://randomuser.me/api/portraits/men/32.jpg',
-      availableDays: ['segunda', 'terça', 'quarta', 'quinta', 'sexta']
+      availableDays: ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira']
     },
     {
       id: '2',
@@ -143,7 +143,7 @@ const TrimGo: React.FC = () => {
       specialty: 'Barba e Estilo',
       rating: 4.8,
       photo: 'https://randomuser.me/api/portraits/men/44.jpg',
-      availableDays: ['terça', 'quarta', 'sábado']
+      availableDays: ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira']
     },
     {
       id: '3',
@@ -151,7 +151,7 @@ const TrimGo: React.FC = () => {
       specialty: 'Cortes Modernos',
       rating: 4.7,
       photo: 'https://randomuser.me/api/portraits/men/22.jpg',
-      availableDays: ['quarta', 'quinta', 'sexta', 'sábado']
+      availableDays: ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira']
     },
     {
       id: '4',
@@ -159,7 +159,7 @@ const TrimGo: React.FC = () => {
       specialty: 'Tratamentos',
       rating: 4.9,
       photo: 'https://randomuser.me/api/portraits/men/65.jpg',
-      availableDays: ['segunda', 'terça', 'quinta', 'sexta']
+      availableDays: ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira']
     }
   ];
 
@@ -239,16 +239,34 @@ const TrimGo: React.FC = () => {
     return slots;
   };
 
-  const formatDate = (date: string): string => {
-    return new Date(date).toLocaleDateString('pt-BR', {
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    });
+    };
+    
+    // Verifica se é hoje
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const inputDate = new Date(dateString);
+    inputDate.setHours(0, 0, 0, 0);
+    
+    if (inputDate.getTime() === today.getTime()) {
+      return `Hoje, ${date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+    }
+    
+    // Verifica se é amanhã
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    if (inputDate.getTime() === tomorrow.getTime()) {
+      return `Amanhã, ${date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+    }
+    
+    return date.toLocaleDateString('pt-BR', options);
   };
-
-
 
   const sendWhatsAppMessage = () => {
     const message = `✂️ *TrimGo - Confirmação de Agendamento* ✂️
@@ -615,20 +633,23 @@ Agradecemos sua preferência!`;
   const renderDateTime = () => {
     // Função auxiliar para verificar se é hoje
     const isToday = (dateString: string) => {
-      const today = new Date().toDateString();
-      return new Date(dateString).toDateString() === today;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const date = new Date(dateString);
+      return date.getTime() === today.getTime();
     };
   
     // Formatação amigável da data
     const formatDisplayDate = (dateString: string) => {
       const date = new Date(dateString);
       const today = new Date();
+      today.setHours(0, 0, 0, 0);
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
   
-      if (date.toDateString() === today.toDateString()) {
+      if (date.getTime() === today.getTime()) {
         return { weekday: 'Hoje', fullDate: date.toLocaleDateString('pt-BR') };
-      } else if (date.toDateString() === tomorrow.toDateString()) {
+      } else if (date.getTime() === tomorrow.getTime()) {
         return { weekday: 'Amanhã', fullDate: date.toLocaleDateString('pt-BR') };
       } else {
         return {
@@ -639,16 +660,47 @@ Agradecemos sua preferência!`;
     };
   
     // Obtém os próximos 7 dias (incluindo hoje)
-    const next7Days = Array.from({ length: 7 }, (_, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() + i);
-      return date.toISOString().split('T')[0];
-    });
+    const getNext7Days = () => {
+      const days = [];
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+        days.push(date.toISOString().split('T')[0]);
+      }
+      
+      return days;
+    };
+  
+    // Função para mapear nomes de dias em português para inglês
+    const mapPortugueseDayToEnglish = (day: string): string => {
+      const dayMap: Record<string, string> = {
+        'segunda': 'monday',
+        'terça': 'tuesday',
+        'quarta': 'wednesday',
+        'quinta': 'thursday',
+        'sexta': 'friday',
+        'sábado': 'saturday',
+        'domingo': 'sunday'
+      };
+      return dayMap[day.toLowerCase()] || day;
+    };
   
     // Filtra apenas dias disponíveis para o barbeiro
-    const availableDays = next7Days.filter(date => {
-      const dayName = new Date(date).toLocaleDateString('pt-BR', { weekday: 'long' }).toLowerCase();
-      return selectedBarber?.availableDays.includes(dayName);
+    const availableDays = getNext7Days().filter(date => {
+      if (!selectedBarber) return false;
+      
+      const dateObj = new Date(date);
+      const dayNameInPortuguese = dateObj.toLocaleDateString('pt-BR', { weekday: 'long' }).toLowerCase();
+      const englishDayName = mapPortugueseDayToEnglish(dayNameInPortuguese);
+      
+      // Verifica se o barbeiro está disponível nesse dia
+      return selectedBarber.availableDays.some(availableDay => {
+        const englishAvailableDay = mapPortugueseDayToEnglish(availableDay);
+        return englishAvailableDay === englishDayName.toLowerCase();
+      });
     });
   
     return (
@@ -683,46 +735,45 @@ Agradecemos sua preferência!`;
         </div>
   
         {/* Seleção de Data */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
-            <Calendar className="w-5 h-5 text-blue-600" />
-            <span>Escolha a Data</span>
-          </h3>
-          
-          <div className="grid gap-3">
-            {availableDays.length > 0 ? (
-              availableDays.map(date => {
-                const { weekday, fullDate } = formatDisplayDate(date);
-                const today = isToday(date);
-                
-                return (
-                  <button
-                    key={date}
-                    onClick={() => setSelectedDate(date)}
-                    className={`p-4 rounded-xl border transition-all transform hover:scale-105 ${
-                      selectedDate === date
-                        ? 'border-blue-500 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 shadow-md'
-                        : 'border-gray-200 hover:border-gray-300 bg-white'
-                    } ${today ? 'ring-2 ring-blue-400' : ''}`}
-                  >
-                    <div className="font-semibold flex items-center">
-                      {weekday}
-                      {today && <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Hoje</span>}
-                    </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      {fullDate}
-                    </div>
-                  </button>
-                );
-              })
-            ) : (
-              <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-center">
-                <p className="text-yellow-800">Este barbeiro não tem disponibilidade nos próximos 7 dias</p>
-              </div>
-            )}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
+              <Calendar className="w-5 h-5 text-blue-600" />
+              <span>Escolha a Data</span>
+            </h3>
+            
+            <div className="grid gap-3">
+              {availableDays.length > 0 ? (
+                availableDays.map(date => {
+                  const { weekday, fullDate } = formatDisplayDate(date);
+                  const today = isToday(date);
+                  
+                  return (
+                    <button
+                      key={date}
+                      onClick={() => setSelectedDate(date)}
+                      className={`p-4 rounded-xl border transition-all transform hover:scale-105 ${
+                        selectedDate === date
+                          ? 'border-blue-500 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 shadow-md'
+                          : 'border-gray-200 hover:border-gray-300 bg-white'
+                      } ${today ? 'ring-2 ring-blue-400' : ''}`}
+                    >
+                      <div className="font-semibold flex items-center">
+                        {weekday}
+                        {today && <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Hoje</span>}
+                      </div>
+                      <div className="text-sm text-gray-500 mt-1">
+                        {fullDate}
+                      </div>
+                    </button>
+                  );
+                })
+              ) : (
+                <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-center">
+                  <p className="text-yellow-800">Este barbeiro não tem disponibilidade nos próximos 7 dias</p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-  
         {/* Horários Disponíveis (mostra apenas quando uma data é selecionada) */}
         {selectedDate && (
           <div className="space-y-4">
